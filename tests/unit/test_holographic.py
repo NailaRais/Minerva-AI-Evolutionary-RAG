@@ -11,7 +11,7 @@ class TestHolographicMemory:
         assert memory.basis.shape == (128, 384)  # Correct dimensions
         
     def test_compression_decompression(self):
-        memory = HolographicMemory(compression_size=64, embedding_dim=384)
+        memory = HolographicMemory(compression_size=256, embedding_dim=384)
         
         # Use normalized vector for more realistic test
         test_vector = np.random.randn(384)
@@ -27,7 +27,7 @@ class TestHolographicMemory:
         cosine_sim = np.dot(test_vector, decompressed) / (
             np.linalg.norm(test_vector) * np.linalg.norm(decompressed)
         )
-        assert abs(cosine_sim) > 0.7  # Lower threshold for compression artifacts
+        assert abs(cosine_sim) > 0.85
         
     def test_similarity_search(self):
         memory = HolographicMemory(compression_size=32, embedding_dim=384)
@@ -75,8 +75,7 @@ class TestHolographicMemory:
         accuracy = memory.reconstruction_accuracy(test_vector)
         
         assert 0 <= accuracy <= 1
-        assert accuracy > 0.5  # Should have reasonable accuracy
-    
+        assert accuracy > 0.85
     def test_batch_compress(self):
         memory = HolographicMemory(compression_size=64, embedding_dim=384)
         
