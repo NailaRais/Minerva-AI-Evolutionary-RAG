@@ -1,0 +1,49 @@
+name: Performance Benchmark
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Run weekly
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        pip install -e ".[dev]"
+        pip install requests tqdm
+    
+    - name: Download benchmark dataset
+      run: |
+        python scripts/automation/download_benchmark_data.py
+    
+    - name: Run comprehensive benchmarks
+      run: |
+        python scripts/automation/auto_benchmark.py --full-suite
+    
+    - name: Upload benchmark results
+      uses: actions/upload-artifact@v3
+      with:
+        name: benchmark-results
+        path: benchmark_results/
+    
+    - name: Generate performance report
+      run: |
+        python scripts/automation/generate_report.py
+    
+    - name: Upload report to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./reports
