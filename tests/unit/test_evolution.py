@@ -48,4 +48,10 @@ class TestEvolutionaryOptimizer:
             )
             gene_pool.add_gene(gene)
         
-       
+        initial_size = optimizer._estimate_memory_usage()
+        target_size = initial_size // 2  # Reduce by half
+        
+        optimizer.optimize_memory(target_size)
+        final_size = optimizer._estimate_memory_usage()
+        
+        assert final_size <= target_size * 1.1  # Allow 10% tolerance
