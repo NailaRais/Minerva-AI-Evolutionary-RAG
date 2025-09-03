@@ -1,0 +1,21 @@
+project_name: "minerva_knowledge_base"
+
+evolution:
+  mutation_rate: 0.15
+  selection_pressure: 0.8
+  crossover_rate: 0.4
+  depth: 3
+
+retrieval:
+  holographic_compression: 128
+  superposition_collapse: "adaptive"
+  top_k: 5
+
+llm:
+  model: "phi3:3.8b-q4_0"
+  temperature: 0.1
+  timeout: 300
+
+storage:
+  max_genes: 1000000
+  compression_level: 9
