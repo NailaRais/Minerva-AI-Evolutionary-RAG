@@ -21,11 +21,12 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'
-    
+
+    # In your ci.yml, modify the "Install dependencies" step:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -e ".[dev]"
+        pip install -e .[dev]  # This installs your package in editable mode
         pip install pytest pytest-cov
     
     - name: Run unit tests
