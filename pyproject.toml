@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "minerva-rag"
+version = "0.1.0"
+description = "Evolutionary RAG system with holographic memory compression"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.21.0",
+    "sentence-transformers>=2.2.0",
+    "torch>=2.0.0",
+    "transformers>=4.30.0",
+    "networkx>=3.0",
+    "scikit-learn>=1.0.0",
+    "pyyaml>=6.0",
+    "tqdm>=4.65.0",
+    "ollama>=0.1.0",
+    "unstructured>=0.10.0",
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "isort>=5.12.0"
+]
+
+[tool.setuptools]
+packages = ["minerva", "minerva.core", "minerva.retrieval"]
+
+[tool.setuptools.package-dir]
+minerva = "minerva"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "--verbose --cov=minerva --cov-report=xml"
+
+[tool.coverage.run]
+source = ["minerva"]
