@@ -3,7 +3,7 @@ import numpy as np
 from minerva.retrieval.holographic import HolographicMemory
 
 class TestHolographicMemory:
-    def test_initialization(self):
+    def test_initialization():
         memory = HolographicMemory(compression_size=128, embedding_dim=384)
         assert memory.compression_size == 128
         assert memory.embedding_dim == 384
@@ -11,7 +11,7 @@ class TestHolographicMemory:
         assert memory.basis.shape == (128, 384)  # Correct dimensions
 
 
-def test_compression_decompression(self):
+def test_compression_decompression():
     memory = HolographicMemory(compression_size=256, embedding_dim=384)  # 1.5:1 compression
     
     test_vector = np.random.randn(384)
@@ -30,7 +30,7 @@ def test_compression_decompression(self):
     )
     assert abs(cosine_sim) > 0.7  # Lowered from 0.85 to 0.7
 
-def test_reconstruction_accuracy(self):
+def test_reconstruction_accuracy():
     memory = HolographicMemory(compression_size=256, embedding_dim=384)
     
     test_vector = np.random.randn(384)
@@ -43,7 +43,7 @@ def test_reconstruction_accuracy(self):
     assert accuracy > 0.6  # Lowered from 0.85 to 0.6
 
         
-    def test_similarity_search(self):
+    def test_similarity_search():
         memory = HolographicMemory(compression_size=32, embedding_dim=384)
         
         # Create normalized vectors for more realistic test
@@ -63,7 +63,7 @@ def test_reconstruction_accuracy(self):
         # Similarities should be in descending order
         assert similarities == sorted(similarities, reverse=True)
     
-    def test_dimension_validation(self):
+    def test_dimension_validation():
         memory = HolographicMemory(compression_size=64, embedding_dim=384)
         
         # Test with wrong dimension - should raise ValueError
@@ -79,7 +79,7 @@ def test_reconstruction_accuracy(self):
             memory.decompress(wrong_compressed)
     
   
-    def test_batch_compress(self):
+    def test_batch_compress():
         memory = HolographicMemory(compression_size=64, embedding_dim=384)
         
         # Create multiple test vectors
@@ -95,14 +95,14 @@ def test_reconstruction_accuracy(self):
         for compressed in compressed_vectors:
             assert compressed.shape == (64,)
     
-    def test_compression_ratio(self):
+    def test_compression_ratio():
         memory = HolographicMemory(compression_size=64, embedding_dim=384)
         ratio = memory.get_compression_ratio()
         
         expected_ratio = 384 / 64  # 6.0
         assert ratio == expected_ratio
     
-    def test_edge_cases(self):
+    def test_edge_cases():
         memory = HolographicMemory(compression_size=64, embedding_dim=384)
         
         # Test with zero vector
