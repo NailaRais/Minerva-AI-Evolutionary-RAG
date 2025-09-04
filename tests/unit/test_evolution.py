@@ -3,7 +3,7 @@ import numpy as np
 from minerva.core.evolution import EvolutionaryOptimizer
 from minerva.core.genome import NeuralGenePool, KnowledgeGene
 
-def test_optimize_memory(self):
+def test_optimize_memory():
     config = {"evolution": {"mutation_rate": 0.1}}
     gene_pool = NeuralGenePool(config)
     optimizer = EvolutionaryOptimizer(gene_pool)
@@ -26,7 +26,7 @@ def test_optimize_memory(self):
     assert final_size <= target_size * 3.0  # Increased to 3.0
 
 class TestEvolutionaryOptimizer:
-    def test_optimizer_initialization(self):
+    def test_optimizer_initialization():
         config = {"evolution": {"mutation_rate": 0.1}}
         gene_pool = NeuralGenePool(config)
         optimizer = EvolutionaryOptimizer(gene_pool)
@@ -34,7 +34,7 @@ class TestEvolutionaryOptimizer:
         assert optimizer.gene_pool == gene_pool
         assert optimizer.generation == 0
         
-    def test_run_generation(self):
+    def test_run_generation():
         config = {"evolution": {"mutation_rate": 0.1, "depth": 1}}
         gene_pool = NeuralGenePool(config)
         optimizer = EvolutionaryOptimizer(gene_pool)
@@ -53,7 +53,7 @@ class TestEvolutionaryOptimizer:
         
     
     
-    def test_optimize_memory_with_empty_pool(self):
+    def test_optimize_memory_with_empty_pool():
         """Test that optimize_memory works with empty gene pool."""
         config = {"evolution": {"mutation_rate": 0.1}}
         gene_pool = NeuralGenePool(config)
@@ -64,7 +64,7 @@ class TestEvolutionaryOptimizer:
         
         assert optimizer.generation >= 0
     
-    def test_run_generation_with_no_genes(self):
+    def test_run_generation_with_no_genes():
         """Test that run_generation works with no genes."""
         config = {"evolution": {"mutation_rate": 0.1}}
         gene_pool = NeuralGenePool(config)
@@ -76,7 +76,7 @@ class TestEvolutionaryOptimizer:
         assert optimizer.generation == 1
         assert len(gene_pool.genes) == 0
     
-    def test_get_stats(self):
+    def test_get_stats():
         """Test the get_stats method."""
         config = {"evolution": {"mutation_rate": 0.1}}
         gene_pool = NeuralGenePool(config)
